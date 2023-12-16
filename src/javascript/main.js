@@ -11,6 +11,7 @@ const fetchQuestions = async () => {
     const response = await axios.get(apiUrl);
    questions = response.data.results;
     console.log(response.data.results);
+    displayQuestion()
   } catch (error) {
     console.error('Error fetching: ', error);
   }
@@ -37,3 +38,10 @@ const displayQuestion = () => {
   optionsContainer.appendChild(correctOptionElement);
 }
 
+const nextQuestion = () => {
+  const selectedOption = document.querySelector('input[name="option"]:checked');
+  if(selectedOption){
+    const selectedOptionValue = selectedOption.value;
+    const currentQuestion = questions[currentQuestionIndex];
+  }
+}
