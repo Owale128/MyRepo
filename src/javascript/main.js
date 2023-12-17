@@ -1,7 +1,7 @@
 import '/src/sass/main.css'
 import axios from 'axios';
 
-const apiUrl = 'https://opentdb.com/api.php?amount=10&category=15&difficulty=easy';
+const apiUrl = 'https://opentdb.com/api.php?amount=10&category=31&difficulty=easy';
 
 let currentQuestionIndex = 0;
 let questions = [];
@@ -10,14 +10,14 @@ const fetchQuestions = async () => {
   try {
     const response = await axios.get(apiUrl);
    questions = response.data.results;
-    console.log(response.data.results);
     displayQuestion()
+    
   } catch (error) {
     console.error('Error fetching: ', error);
   }
 };
 
-// fetchQuestions();
+fetchQuestions();
 
 const displayQuestion = () => {
 
@@ -25,7 +25,7 @@ const displayQuestion = () => {
   const optionsContainer = document.getElementById('options');
   const currentQuestion = questions[currentQuestionIndex];
 
-  questionContainer.innerHTML = currentQuestion.questions;
+  questionContainer.innerHTML = currentQuestion.question;
   optionsContainer.innerHTML = '';
 
   currentQuestion.incorrect_answers.forEach((option, index)=>{
@@ -40,8 +40,25 @@ const displayQuestion = () => {
 
 const nextQuestion = () => {
   const selectedOption = document.querySelector('input[name="option"]:checked');
+
   if(selectedOption){
     const selectedOptionValue = selectedOption.value;
     const currentQuestion = questions[currentQuestionIndex];
+
+    if (selectedOptionValue === 'correct') {
+      alert('Correct!');
+    } else {
+      alert(`Incorrect! The correct answer is: ${currentQuestion.correct_answer}`);
+    }
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+      displayQuestion()
+    } else {
+      confirm('Quiz completed! - Try again?');
+      currentQuestionIndex = 0;
+      fetchQuestions()
+    }
+  } else {
+    alert('Please select an option before moving to the next question.');
   }
 }

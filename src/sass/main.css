@@ -1,1 +1,31 @@
-/*# sourceMappingURL=main.css.map */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10%;
+}
+
+body {
+  font-size: 1.4em;
+  background-color: lightblue;
+}
+
+h1 {
+  color: blue;
+  margin-bottom: 5px;
+  text-decoration: underline;
+}
+
+#quiz-container {
+  border: 1px solid black;
+  padding: 25px;
+  border-radius: 20px;
+  background-color: white;
+  max-width: 800px;
+}/*# sourceMappingURL=main.css.map */
